@@ -1,4 +1,5 @@
 PREFIX = /etc/calamares
+BRANDING = $(PREFIX)/branding/rhino
 ARCH ?= $(shell uname -m)
 
 MODULES = \
@@ -25,13 +26,26 @@ MODULES = \
 	modules/shellprocess_fixconkeys_part1.conf \
 	modules/shellprocess_fixconkeys_part2.conf \
 	modules/shellprocess_fix_oem_uid.conf \
-	modules/shellprocess_logs.conf \
 	modules/shellprocess_oemprep.conf \
 	modules/umount.conf \
 	modules/unpackfs.conf \
 	modules/users.conf \
 	modules/users.conf.oem \
 	modules/welcome.conf
+
+THEME = \
+	branding/Base.png \
+	branding/branding.desc \
+	branding/icon.png \
+	branding/logo.png \
+	branding/rhino-calamares.png \
+	branding/rhinopkg.png \
+	branding/show.qml \
+	branding/System.png \
+	branding/Unicorn.png \
+	branding/waves.png \
+	branding/welcome.png \
+	branding/Wizard.png \
 
 # We love debian style names.
 ifeq ($(ARCH),amd64)
@@ -48,5 +62,7 @@ install:
 	install -d $(DESTDIR)$(PREFIX)/modules
 	install -m644 settings.conf $(DESTDIR)$(PREFIX)/
 	install -m644 $(MODULES) $(DESTDIR)$(PREFIX)/modules/
+	install -d $(DESTDIR)$(BRANDING)
+	install -m644 $(THEME) $(DESTDIR)$(BRANDING)
 
 .PHONY: all install
