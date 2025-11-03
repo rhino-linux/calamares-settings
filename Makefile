@@ -33,6 +33,8 @@ MODULES = \
 	modules/users.conf.oem \
 	modules/welcome.conf
 
+PY_MODULES = py-modules/automirror/
+
 THEME = \
 	branding/Base.png \
 	branding/branding.desc \
@@ -59,10 +61,10 @@ endif
 all: install
 
 install:
-	install -d $(DESTDIR)$(PREFIX)/modules
-	install -m644 settings.conf $(DESTDIR)$(PREFIX)/
-	install -m644 $(MODULES) $(DESTDIR)$(PREFIX)/modules/
-	install -d $(DESTDIR)$(BRANDING)
-	install -m644 $(THEME) $(DESTDIR)$(BRANDING)
+	install -m644 settings.conf $(DESTDIR)/$(PREFIX)/
+	install -Dm644 $(MODULES) $(DESTDIR)/$(PREFIX)/modules/
+	install -Dm644 $(THEME) $(DESTDIR)/$(BRANDING)
+
+	install -Dm644 $(PY_MODULES) $(DESTDIR)/usr/lib/$(ARCH)-linux-gnu/calamares/modules/
 
 .PHONY: all install
