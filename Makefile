@@ -2,6 +2,11 @@ PREFIX = /etc/calamares
 BRANDING = $(PREFIX)/branding/rhino
 ARCH ?= $(shell uname -m)
 
+# We love debian style names.
+ifeq ($(ARCH),amd64)
+  ARCH := x86_64
+endif
+
 MODULES = \
 	modules/after_bootloader_context.conf \
 	modules/automirror.conf \
@@ -33,7 +38,7 @@ MODULES = \
 	modules/users.conf.oem \
 	modules/welcome.conf
 
-PY_MODULES = py-modules/automirror/
+PY_MODULES = py-modules-$(ARCH)/automirror/
 
 LIBEXEC_SCRIPTS = libexec-scripts/fixconkeys-part1 \
 				  libexec-scripts/fixconkeys-part2
@@ -51,11 +56,6 @@ THEME = \
 	branding/waves.png \
 	branding/welcome.png \
 	branding/Wizard.png \
-
-# We love debian style names.
-ifeq ($(ARCH),amd64)
-  ARCH := x86_64
-endif
 
 ifeq ($(ARCH),x86_64)
 	MODULES += modules/shellprocess_add386arch.conf
