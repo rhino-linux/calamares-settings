@@ -71,7 +71,7 @@ install:
 	install -Dm644 settings.conf $(DESTDIR)$(PREFIX)/
 	install -Dm644 $(MODULES) $(DESTDIR)$(PREFIX)/modules/
 	install -Dm644 $(THEME) $(DESTDIR)$(BRANDING)
-	install -Dm644 $(LIBEXEC_SCRIPTS) $(DESTDIR)/usr/libexec/
+	install -Dm755 $(LIBEXEC_SCRIPTS) $(DESTDIR)/usr/libexec/
 
 	cp -r $(PY_MODULES) $(DESTDIR)/usr/lib/$(ARCH)-linux-gnu/calamares/modules/
 
