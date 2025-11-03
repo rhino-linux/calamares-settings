@@ -35,6 +35,9 @@ MODULES = \
 
 PY_MODULES = py-modules/automirror/
 
+LIBEXEC_SCRIPTS = libexec-scripts/fixconkeys-part1 \
+				  libexec-scripts/fixconkeys-part2
+
 THEME = \
 	branding/Base.png \
 	branding/branding.desc \
@@ -61,10 +64,14 @@ endif
 all: install
 
 install:
-	install -m644 settings.conf $(DESTDIR)/$(PREFIX)/
-	install -Dm644 $(MODULES) $(DESTDIR)/$(PREFIX)/modules/
-	install -Dm644 $(THEME) $(DESTDIR)/$(BRANDING)
+	install -d $(DESTDIR)$(PREFIX)/modules
+	install -d $(DESTDIR)$(BRANDING)/
+	install -d $(DESTDIR)/usr/libexec/
+	install -Dm644 settings.conf $(DESTDIR)$(PREFIX)/
+	install -Dm644 $(MODULES) $(DESTDIR)$(PREFIX)/modules/
+	install -Dm644 $(THEME) $(DESTDIR)$(BRANDING)
+	install -Dm644 $(LIBEXEC_SCRIPTS) $(DESTDIR)/usr/libexec/
 
-	install -Dm644 $(PY_MODULES) $(DESTDIR)/usr/lib/$(ARCH)-linux-gnu/calamares/modules/
+	cp -r $(PY_MODULES) $(DESTDIR)/usr/lib/$(ARCH)-linux-gnu/calamares/modules/
 
 .PHONY: all install
