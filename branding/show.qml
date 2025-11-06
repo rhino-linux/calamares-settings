@@ -1,8 +1,7 @@
-import QtQuick 2.0;
-import calamares.slideshow 1.0;
+import QtQuick 2.0
+import calamares.slideshow 1.0
 
-Presentation
-{
+Presentation {
     id: presentation
 
     Timer {
@@ -12,16 +11,16 @@ Presentation
         repeat: true
         onTriggered: presentation.goToNextSlide()
     }
-    
+
     Slide {
         Image {
             id: image1
             source: "Base.png"
-	    width: 1080
+            width: 1080
             fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
-	    x: 0
-	    y: 120
+            x: 0
+            y: 120
         }
     }
 
@@ -30,40 +29,37 @@ Presentation
         Image {
             id: image2
             source: "Wizard.png"
-	    width: 1080
+            width: 1080
             fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
-	    x: 0
-	    y: 120
+            x: 0
+            y: 120
         }
     }
-
-
 
     Slide {
 
         Image {
             id: image3
             source: "Unicorn.png"
-	    width: 1080
+            width: 1080
             fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
-	    x: 0
-	    y: 120
+            x: 0
+            y: 120
         }
     }
-	
-	
+
     Slide {
 
         Image {
             id: image4
             source: "rhinopkg.png"
-	    width: 1080
+            width: 1080
             fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
-	    x: 0
-	    y: 120
+            x: 0
+            y: 120
         }
     }
 
@@ -72,11 +68,11 @@ Presentation
         Image {
             id: image5
             source: "System.png"
-	    width: 1080
+            width: 1080
             fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
-	    x: 0
-	    y: 120
+            x: 0
+            y: 120
         }
     }
 
