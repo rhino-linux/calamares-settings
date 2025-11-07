@@ -1,10 +1,11 @@
 PREFIX = /etc/calamares
 BRANDING = $(PREFIX)/branding/rhino
-ARCH ?= $(shell uname -m)
 
-# We love debian style names.
-ifeq ($(ARCH),amd64)
-  ARCH := x86_64
+.PHONY: check-env
+
+check-env:
+ifndef ARCH
+	$(error ARCH is undefined)
 endif
 
 MODULES = \
@@ -57,7 +58,7 @@ THEME = \
 	branding/welcome.png \
 	branding/Wizard.png \
 
-ifeq ($(ARCH),x86_64)
+ifeq ($(ARCH),amd64)
 	MODULES += modules/shellprocess_add386arch.conf
 endif
 
