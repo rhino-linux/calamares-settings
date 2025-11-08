@@ -58,7 +58,7 @@ THEME = \
 	branding/welcome.png \
 	branding/Wizard.png \
 
-ifeq ($(ARCH),amd64)
+ifeq ($(ARCH),x86_64)
 	MODULES += modules/shellprocess_add386arch.conf
 endif
 
