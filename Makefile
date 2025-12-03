@@ -10,7 +10,6 @@ endif
 
 MODULES = \
 	modules/after_bootloader_context.conf \
-	modules/automirror.conf \
 	modules/before_bootloader_context.conf \
 	modules/before_bootloader_mkdirs_context.conf \
 	modules/bootloader.conf \
@@ -75,5 +74,6 @@ install:
 	install -Dm755 $(LIBEXEC_SCRIPTS) $(DESTDIR)/usr/libexec/
 
 	cp -r $(PY_MODULES) $(DESTDIR)/usr/lib/$(ARCH)-linux-gnu/calamares/modules/
+	cp $(DESTDIR)/usr/lib/$(ARCH)-linux-gnu/calamares/modules/automirror/automirror.conf $(DESTDIR)$(PREFIX)/modules/
 
 .PHONY: all install
