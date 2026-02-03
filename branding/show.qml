@@ -4,6 +4,11 @@ import calamares.slideshow 1.0
 Presentation {
     id: presentation
 
+    Rectangle {
+        anchors.fill: parent
+        color: '#231e37'
+    }
+
     Timer {
         id: advanceTimer
         interval: 8000
