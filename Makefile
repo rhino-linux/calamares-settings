@@ -91,7 +91,9 @@ install-common:
 	install -Dm644 $(SETTINGS_CONF) $(DESTDIR)$(PREFIX)/settings.conf
 	install -Dm644 $(MODULES) $(DESTDIR)$(PREFIX)/modules/
 	install -Dm644 $(DISPLAYMANAGER_CONF) $(DESTDIR)$(PREFIX)/modules/displaymanager.conf
-	install -Dm644 $(EXTRA_MODULES) $(DESTDIR)$(PREFIX)/modules/
+	if [ -n "$(EXTRA_MODULES)" ]; then \
+		install -Dm644 $(EXTRA_MODULES) $(DESTDIR)$(PREFIX)/modules/; \
+	fi
 	install -Dm644 $(THEME) $(DESTDIR)$(BRANDING)
 	install -Dm755 $(LIBEXEC_SCRIPTS) $(DESTDIR)/usr/libexec/
 
