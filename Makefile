@@ -1,7 +1,7 @@
 PREFIX = /etc/calamares
 BRANDING = $(PREFIX)/branding/rhino
 
-.PHONY: check-env
+.PHONY: all install unicorn lomiri check-env
 
 check-env:
 ifndef ARCH
@@ -55,25 +55,45 @@ THEME = \
 	branding/Unicorn.png \
 	branding/waves.png \
 	branding/welcome.png \
-	branding/Wizard.png \
+	branding/Wizard.png
+
+SETTINGS_CONF = settings.conf
+DISPLAYMANAGER_CONF = modules/displaymanager.conf
+EXTRA_MODULES =
 
 ifeq ($(ARCH),x86_64)
 	MODULES += modules/shellprocess_add386arch.conf
 endif
 
-all: install
+all: unicorn
 
-install:
+install: unicorn
+
+unicorn: check-env
+	$(MAKE) install-common
+
+lomiri: SETTINGS_CONF = settings-lomiri.conf
+lomiri: DISPLAYMANAGER_CONF = modules/displaymanager_lomiri.conf
+lomiri: EXTRA_MODULES = modules/after_bootloader_context_lomiri.conf
+lomiri: check-env
+	$(MAKE) install-common \
+		SETTINGS_CONF="$(SETTINGS_CONF)" \
+		DISPLAYMANAGER_CONF="$(DISPLAYMANAGER_CONF)" \
+		EXTRA_MODULES="$(EXTRA_MODULES)"
+
+.PHONY: install-common
+
+install-common:
 	install -d $(DESTDIR)$(PREFIX)/modules
 	install -d $(DESTDIR)$(BRANDING)/
 	install -d $(DESTDIR)/usr/libexec/
 	install -d $(DESTDIR)/usr/lib/$(ARCH)-linux-gnu/calamares/modules/
-	install -Dm644 settings.conf $(DESTDIR)$(PREFIX)/
+	install -Dm644 $(SETTINGS_CONF) $(DESTDIR)$(PREFIX)/settings.conf
 	install -Dm644 $(MODULES) $(DESTDIR)$(PREFIX)/modules/
+	install -Dm644 $(DISPLAYMANAGER_CONF) $(DESTDIR)$(PREFIX)/modules/displaymanager.conf
+	install -Dm644 $(EXTRA_MODULES) $(DESTDIR)$(PREFIX)/modules/
 	install -Dm644 $(THEME) $(DESTDIR)$(BRANDING)
 	install -Dm755 $(LIBEXEC_SCRIPTS) $(DESTDIR)/usr/libexec/
 
 	cp -r $(PY_MODULES) $(DESTDIR)/usr/lib/$(ARCH)-linux-gnu/calamares/modules/
 	cp $(DESTDIR)/usr/lib/$(ARCH)-linux-gnu/calamares/modules/automirror/automirror.conf $(DESTDIR)$(PREFIX)/modules/
-
-.PHONY: all install
