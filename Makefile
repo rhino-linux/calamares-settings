@@ -53,7 +53,6 @@ THEME = \
 	branding/show.qml \
 	branding/System.png \
 	branding/Unicorn.png \
-	branding/waves.png \
 	branding/welcome.png \
 	branding/Wizard.png
 
